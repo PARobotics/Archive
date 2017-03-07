@@ -1,0 +1,37 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   Analysis/a_single.m
+#	new file:   Data/2.dat
+#	new file:   Data/28_1.dat
+#	new file:   Data/28_1.txt
+#	new file:   Data/28_2.txt
+#	new file:   Data/28_3.dat
+#	new file:   Data/28_3.txt
+#	new file:   Data/28_6.dat
+#	new file:   Data/2batt_1.dat
+#	new file:   Data/2batt_1.txt
+#	new file:   Data/2batt_2.dat
+#	new file:   Data/2batt_2.txt
+#	new file:   Data/2batt_3.dat
+#	new file:   Data/2batt_3.txt
+#	new file:   Data/2batt_4.dat
+#	new file:   Data/2batt_4.txt
+#	new file:   Data/2batt_5.dat
+#	new file:   Data/2batt_5.txt
+#	new file:   Data/2batt_6.dat
+#	new file:   Data/2batt_6.txt
+#	new file:   Data/s_in_row_1.dat
+#	new file:   Data/s_in_row_1.txt
+#	modified:   Engineering/Engineering_Book.xlsx
+#	new file:   Engineering/~$Engineering_Book.xlsx
+#	modified:   SRC/rb_new_1.h
+#	modified:   SRC/somnus.c
+#	modified:   SRC/somnus_func.c
+#	modified:   SRC/somnus_remote.c
+#
+

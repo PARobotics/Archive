@@ -1,0 +1,59 @@
+Practice Agenda (for the last few practices)
+*** BE FOCUSED
+*** PAY ATTENTION BE PROCEDURE
+*** NEED at least 8-10 Rubber bands calibrated for the SNE-state games
+*** USE the side you will be doing skills at QCC
+*** Need some one to video taping and timing
+
+A. calibrate base shooter and fine tune auto_A
+       ** it is also possible that rubber band (hardware) may need slight loosening or tightening
+       ** as part of procedure rubberband should be cleaned and lubricated regularly
+       ** rubber band also should be always mounted in a consistent way (fixed mount after calibration since we not doing lift)
+    a. run Auto_A followed by 5-10 single shots
+    b. collect the data and saved it as "rb_x_calib_y.txt" (x is number of rubber band; y is the number of calib test for the rubber band)
+    c. push the data via github
+    d. run matlab code to examine the data 
+    e. modify the rbx_state.h heading file
+       ** if may take a few iterations until you get the rubber band work
+    f. fine tune auto_A: currently auto_A use AUTO_ADJUST, some minor changes to auto_A may be needed if it has consistency issue
+    
+B. verify short and mid range shooting 
+    a. these are easy to calibrate, likely no need to collect data
+    b. drive up to short/mid range, file a few shots
+    c. make minor mod to the h file
+    
+C. Repeat A & B for the rest of rubber bands (do in 2-3 batches)
+
+D. Calibrate auto_B and drive, pick up and repositioning game strategy
+    a. run auto_B; some fine tuning of parameters (red, blue sides)
+    b. drive around, grab, shot (practice skills to pick up red balls first, and only shot when you have 4 in position) time it to 50-60 seconds
+    c. you have 45-55 seconds to move back, reposition, and shoot 28 balls (practice a strategy to reposition)
+    
+E. Test the magic_1() alignment.
+    a. run auto_A, then make a couple of single shots
+    b. hit the magic button to reposition
+    c. fire a few more shots and reposition until perfect (record how to reposition)
+    d. adjust the parameters
+       ** notice robot may more during 32 shots -- magic_1() may need recali for skills
+       ** come up a strategy to reduce robot movements in skills (a procedure that kind of lock robot in position)
+    
+F. Robot skills  -- key is the communication between loader and shooter
+    a. single shots 32
+    b. push magic_1 to reposition  (collect info for better magic_1 -- 
+    c. single shots till time run out 
+    
+G. Fine tune program skills
+    a. this is more difficult to tune because AUTO_ADJ, time to rest battery, reposition etc
+    b. just take time, be patient ...
+    
+H. MORE PRACTICES
+   auto_A followed by drive and pick balls and shot short range 
+   auto_B followed by 50-60 seconds field and move back, reposition and shooting 
+      good strategy to pick, shoot -- maximize field goals
+      move to reposition and shoot
+   robot_skills (communication between loader and shooter, and ball loading skills)
+   program skills (fine tuning parameters based on robot skills)
+   
+I. DISCUSSION
+    procedure, role at the game
+    defense strategies

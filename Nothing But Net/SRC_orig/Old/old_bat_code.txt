@@ -1,0 +1,77 @@
+void bat_pull_long_old()
+{
+  int tnow = time1[T1];
+  int v;
+  int degPerSec, dtMore;
+  int v1 = BAT_LONG_PULL_V1*VOLT_SCALE;
+  int v2 = BAT_LONG_PULL_V2*VOLT_SCALE;
+  int ang1 = BAT_LONG_PULL_ANG1;
+  int ang2 = BAT_LONG_PULL_ANG2;       // move the loaded area with MAX
+  int BAT_LONG_PULL_V2_touse;
+  bat(PULL*v1);
+  while (true) {
+    // don't set v = 0; leave it later ...
+    if (is_bailed_out()==1 || is_timed_out(tnow+BAT_PULL_TMAX )==1) {
+      #if DEBUG_BAT>0
+        writeDebugStreamLine("pull bail out");
+      #endif
+      break ;
+    }
+
+    // phase 1 -- full vol ahead
+    if (Bat_val<=ang1)
+    {
+      // bat(PULL*BAT_LONG_PULL_V1*8000/volt2());
+      bat(PULL*v1);
+    }
+    // phase 2 -- reduce vol linearly
+    else if (Bat_val<=ang2)
+    {
+      v = v1-(Bat_val-ang1)*(v1-v2)/(ang2-ang1);
+      bat(PULL*v);
+    }
+    // phase 3 --
+    else
+    {
+      bat(PULL*v2);
+      wait1Msec(BAT_LONG_PULL_DT) ;  // hold some time
+      getBatVal();                   // now update velocity and ang
+      if (Bat_val>=BAT_LONG_PULL_ANG_MAX)
+      {
+        #if DEBUG_BAT>0
+          writeDebugStreamLine("pull out %d %d",Bat_val,BAT_LONG_PULL_ANG_MAX);
+        #endif
+        break;
+      }
+      degPerSec = (Bat_rpm+Bat_rpm_last)*6/2;
+
+      // my hack logics
+      // if (BAT_CMD==CONTINUOUS && degPerSec/3 < 300)
+      if (BAT_CMD==CONTINUOUS && degPerSec/3 < 400)
+      {
+        BAT_LONG_PULL_V2_touse = BAT_LONG_PULL_V2 + (400-degPerSec/3 )/3;
+        // BAT_LONG_PULL_V2_touse = BAT_LONG_PULL_V2 + (300-degPerSec/3 )/3;
+        writeDebugStreamLine("*** adj PULL_V2->%d ",BAT_LONG_PULL_V2_touse);
+        dtMore = bound(dtMore,20, 60);
+      }
+      else{BAT_LONG_PULL_V2_touse = BAT_LONG_PULL_V2;};
+
+      bat(PULL*BAT_LONG_PULL_V2_touse*VOLT_SCALE);
+
+      // dtMore = (BAT_LONG_PULL_ANG_MAX-Bat_val)*1000/degPerSec-BAT_LONG_PULL_REV_DT/2;
+      // dtMore = (BAT_LONG_PULL_ANG_MAX-Bat_val)*1000/degPerSec-BAT_LONG_PULL_REV_DT/2;
+      dtMore = (BAT_LONG_PULL_ANG_MAX-Bat_val)*1000/degPerSec-BAT_LONG_PULL_REV_DT;
+      dtMore = bound(dtMore,0, 120);                // if stuck, I don't think takes more than extran  120 msec
+               writeDebugStreamLine("*** dt = %d , A = %d , rpm = %d ",dtMore,Bat_val, degPerSec/3);
+
+      wait1Msec(dtMore);             // hold extra time at the voltage based on how much has moved etc
+      getBatVal();                   // now update velocity and ang
+      #if DEBUG_BAT>0
+         writeDebugStreamLine("pull out %d",Bat_val);
+       #endif
+       break;
+    }
+    getBatVal();
+    // wait1Msec(2);
+  }
+}
